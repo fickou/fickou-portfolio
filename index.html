@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio de Daouda Fickou | Développeur Full Stack</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+            --accent-color: #3b82f6;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f9fafb;
+        }
+        
+        .section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .skill-bar {
+            height: 10px;
+            border-radius: 10px;
+            background-color: #e5e7eb;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            border-radius: 10px;
+            background-color: var(--primary-color);
+            width: 0;
+            transition: width 1s ease-in-out;
+        }
+        
+        .project-card {
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            background-color: white;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-info i {
+            color: var(--primary-color);
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 7px;
+            height: 100%;
+            width: 2px;
+            background-color: var(--primary-color);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: -2rem;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+        }
+        
+        .animated {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            .section {
+                padding: 3rem 0;
+            }
+            
+            .mobile-menu {
+                display: flex;
+                flex-direction: column;
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 80%;
+                height: 100vh;
+                background-color: var(--dark-color);
+                z-index: 100;
+                transition: all 0.3s ease;
+                padding: 2rem;
+            }
+            
+            .mobile-menu.active {
+                left: 0;
+            }
+            
+            .timeline {
+                padding-left: 1.5rem;
+            }
+            
+            .timeline-item::before {
+                left: -1.5rem;
+            }
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+                position: fixed;
+                top: 1rem;
+                right: 1rem;
+                z-index: 101;
+                background-color: var(--primary-color);
+                color: white;
+                padding: 0.5rem;
+                border-radius: 0.25rem;
+            }
+
+            .desktop-menu {
+                display: none;
+            }
+        }
+
+        #home {
+            position: relative;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid var(--primary-color);
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation: 
+                typing 3.5s steps(40, end),
+                blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary-color); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Menu Button -->
+    <div class="hamburger">
+        <i class="fas fa-bars text-xl"></i>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="flex justify-end mb-6">
+            <button class="close-menu text-white text-2xl">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <a href="#home" class="text-white text-lg mb-4 hover:text-blue-300 mobile-link">Accueil</a>
+        <a href="#about" class="text-white text-lg mb-4 hover:text-blue-300 mobile-link">À propos</a>
+        <a href="#skills" class="text-white text-lg mb-4 hover:text-blue-300 mobile-link">Compétences</a>
+        <a href="#education" class="text-white text-lg mb-4 hover:text-blue-300 mobile-link">Formation</a>
+        <a href="#projects" class="text-white text-lg mb-4 hover:text-blue-300 mobile-link">Projets</a>
+        <a href="#contact" class="text-white text-lg mb-4 hover:text-blue-300 mobile-link">Contact</a>
+    </div>
+
+    <!-- Desktop Navigation -->
+    <nav class="fixed top-0 left-0 w-full bg-white shadow-md z-50 desktop-menu">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#home" class="text-xl font-bold text-blue-600">Daouda Fickou</a>
+            <div class="flex space-x-6">
+                <a href="#home" class="hover:text-blue-600 transition-colors">Accueil</a>
+                <a href="#about" class="hover:text-blue-600 transition-colors">À propos</a>
+                <a href="#skills" class="hover:text-blue-600 transition-colors">Compétences</a>
+                <a href="#education" class="hover:text-blue-600 transition-colors">Formation</a>
+                <a href="#projects" class="hover:text-blue-600 transition-colors">Projets</a>
+                <a href="#contact" class="hover:text-blue-600 transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="section">
+        <div class="container mx-auto px-6">
+            <div class="max-w-2xl animated">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">Daouda Fickou</h1>
+                <div class="typewriter mb-6">
+                    <h2 class="text-2xl md:text-3xl font-semibold text-blue-400">Développeur Full Stack</h2>
+                </div>
+                <p class="text-lg md:text-xl mb-8">Passionné par le développement web et l'intelligence artificielle</p>
+                <div class="flex space-x-4">
+                    <a href="#contact" class="btn-primary">Me contacter</a>
+                    <a href="#projects" class="border border-white text-white px-6 py-3 rounded-md hover:bg-white hover:text-blue-600 transition-colors">Voir mes projets</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold section-title animated">À propos de moi</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="animated">
+                    <p class="text-lg mb-6">
+                        Titulaire d'une licence en informatique de l'Université Gaston Berger, je suis passionné par le développement web et les nouvelles technologies. Mes compétences techniques couvrent le front-end (HTML, CSS, JavaScript, Vue.js) et le back-end (PHP, MySQL), avec une expertise dans la conception de bases de données et la création de plateformes web dynamiques.
+                    </p>
+                    <p class="text-lg mb-6">
+                        Je m'intéresse également à l'intelligence artificielle et à ses applications variées. Curieux, rigoureux et doté d'un excellent esprit d'équipe, je suis motivé à approfondir mes connaissances et à relever de nouveaux défis.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 mt-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3">Langues</h3>
+                            <ul class="space-y-2">
+                                <li><i class="fas fa-check text-blue-600 mr-2"></i> Wolof: Natif</li>
+                                <li><i class="fas fa-check text-blue-600 mr-2"></i> Français: Courant</li>
+                                <li><i class="fas fa-check text-blue-600 mr-2"></i> Anglais: Intermédiaire</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3">Qualités</h3>
+                            <ul class="space-y-2">
+                                <li><i class="fas fa-check text-blue-600 mr-2"></i> Dynamique</li>
+                                <li><i class="fas fa-check text-blue-600 mr-2"></i> Curieux</li>
+                                <li><i class="fas fa-check text-blue-600 mr-2"></i> Sens du contact</li>
+                                <li><i class="fas fa-check text-blue-600 mr-2"></i> Esprit d'équipe</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="animated">
+                    <div class="bg-blue-50 p-8 rounded-lg border border-blue-200 h-full flex flex-col justify-center">
+                        <div class="text-center mb-6">
+                            <div class="w-40 h-40 rounded-full bg-blue-600 mx-auto flex items-center justify-center mb-4">
+                                <span class="text-4xl text-white font-bold">
+                                    DF
+                                </span>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-envelope text-blue-600 w-8"></i>
+                                <span>fickou.daouda@ugb.edu.sn</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-phone text-blue-600 w-8"></i>
+                                <span>+221-78-282-96-73</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt text-blue-600 w-8"></i>
+                                <span>Fass Mbao, Dakar, Sénégal</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-heart text-blue-600 w-8"></i>
+                                <span>Football, Arts martiaux</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold section-title animated">Mes Compétences</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="animated">
+                    <h3 class="text-xl font-semibold mb-6">Langages de programmation</h3>
+                    
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span>JavaScript</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90%"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span>PHP</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85%"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span>Python</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80%"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span>C/C++</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="75%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="animated">
+                    <h3 class="text-xl font-semibold mb-6">Technologies Web</h3>
+                    
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span>HTML/CSS</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="95%"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span>Vue.js</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85%"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span>Angular</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80%"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span>Laravel</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="animated">
+                    <h3 class="text-xl font-semibold mb-6">Bases de données</h3>
+                    
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span>MySQL</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90%"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span>SQL</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85%"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span>PL/PgSQL</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="75%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="animated">
+                    <h3 class="text-xl font-semibold mb-6">Autres compétences</h3>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white p-4 rounded-lg shadow-sm flex items-center">
+                            <i class="fas fa-brain text-blue-600 text-xl mr-3"></i>
+                            <span>Machine Learning</span>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-lg shadow-sm flex items-center">
+                            <i class="fas fa-eye text-blue-600 text-xl mr-3"></i>
+                            <span>Computer Vision</span>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-lg shadow-sm flex items-center">
+                            <i class="fas fa-database text-blue-600 text-xl mr-3"></i>
+                            <span>Data Science</span>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-lg shadow-sm flex items-center">
+                            <i class="fas fa-mobile-alt text-blue-600 text-xl mr-3"></i>
+                            <span>Responsive Design</span>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-lg shadow-sm flex items-center">
+                            <i class="fas fa-code-branch text-blue-600 text-xl mr-3"></i>
+                            <span>Git</span>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-lg shadow-sm flex items-center">
+                            <i class="fas fa-users text-blue-600 text-xl mr-3"></i>
+                            <span>Travail d'équipe</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold section-title animated">Formation</h2>
+            <div class="timeline animated">
+                <div class="timeline-item">
+                    <div class="mb-2">
+                        <span class="bg-blue-600 text-white text-sm py-1 px-2 rounded-full">2023-2024</span>
+                    </div>
+                    <h3 class="text-xl font-semibold">Data Science en Python</h3>
+                    <p class="text-gray-600">CEA-MITIC, Université Gaston Berger (UGB)</p>
+                    <p class="mt-2">Formation approfondie en science des données avec Python, incluant l'apprentissage automatique et la vision par ordinateur.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="mb-2">
+                        <span class="bg-blue-600 text-white text-sm py-1 px-2 rounded-full">2020-2023</span>
+                    </div>
+                    <h3 class="text-xl font-semibold">Licence en Informatique</h3>
+                    <p class="text-gray-600">Université Gaston Berger (UGB)</p>
+                    <p class="mt-2">Formation complète en informatique couvrant les langages de programmation, les bases de données, le développement web et les fondements théoriques.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="mb-2">
+                        <span class="bg-blue-600 text-white text-sm py-1 px-2 rounded-full">2019-2020</span>
+                    </div>
+                    <h3 class="text-xl font-semibold">Baccalauréat Scientifique (série S2)</h3>
+                    <p class="text-gray-600">Lycée de Djirédji</p>
+                    <p class="mt-2">Diplôme d'études secondaires avec une spécialisation en sciences.</p>
+                </div>
+            </div>
+            
+            <h2 class="text-3xl font-bold section-title mt-16 animated">Expérience Académique</h2>
+            <div class="timeline animated">
+                <div class="timeline-item">
+                    <div class="mb-2">
+                        <span class="bg-blue-600 text-white text-sm py-1 px-2 rounded-full">En cours</span>
+                    </div>
+                    <h3 class="text-xl font-semibold">Développeur Full Stack</h3>
+                    <p class="text-gray-600">Projet personnel : Plateforme de Mise en Relation Administration-Parents d'Élèves</p>
+                    <p class="mt-2">Conception d'une interface utilisateur intuitive pour les parents et l'administration. Implémentation d'une gestion sécurisée des données. Intégration de notifications en temps réel.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="mb-2">
+                        <span class="bg-blue-600 text-white text-sm py-1 px-2 rounded-full">Mars - Mai 2024</span>
+                    </div>
+                    <h3 class="text-xl font-semibold">Développeur Full Stack</h3>
+                    <p class="text-gray-600">Projet académique : Plateforme de prise de rendez-médical en ligne</p>
+                    <p class="mt-2">Développement de fonctionnalités pour la prise de rendez-vous. Implémentation de l'authentification utilisateur. Maintenance et amélioration continue de l'application.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="mb-2">
+                        <span class="bg-blue-600 text-white text-sm py-1 px-2 rounded-full">Août - Décembre 2024</span>
+                    </div>
+                    <h3 class="text-xl font-semibold">Développeur en Deep Learning</h3>
+                    <p class="text-gray-600">Projet académique : Détection de Cancer du Sein</p>
+                    <p class="mt-2">Mise en place d'un modèle de classification d'images médicales pour la détection des masses bénignes, malignes et normales à partir de la base de données BUSI. Prétraitement des données incluant la normalisation, le redimensionnement et la gestion des classes. Conception d'un réseau de neurones convolutifs (CNN) avec TensorFlow/Keras.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold section-title animated">Mes Projets</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="project-card animated">
+                    <div class="bg-blue-600 h-48 flex items-center justify-center">
+                        <i class="fas fa-school text-white text-5xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Plateforme de Gestion Scolaire</h3>
+                        <p class="text-gray-600 mb-4">Développement complet d'une application pour faciliter les interactions entre administration et parents.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">HTML/CSS</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">JavaScript</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">PHP</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">MySQL</span>
+                        </div>
+                        <button class="text-blue-600 font-medium hover:underline project-details" data-project="project1">Voir les détails</button>
+                    </div>
+                </div>
+                
+                <div class="project-card animated">
+                    <div class="bg-green-600 h-48 flex items-center justify-center">
+                        <i class="fas fa-hospital text-white text-5xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Plateforme de Rendez-vous Médical</h3>
+                        <p class="text-gray-600 mb-4">Création d'une solution pour simplifier la gestion des rendez-vous médicaux en ligne.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Vue.js</span>
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Laravel</span>
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">MySQL</span>
+                        </div>
+                        <button class="text-blue-600 font-medium hover:underline project-details" data-project="project2">Voir les détails</button>
+                    </div>
+                </div>
+                
+                <div class="project-card animated">
+                    <div class="bg-purple-600 h-48 flex items-center justify-center">
+                        <i class="fas fa-brain text-white text-5xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Classification de Fleurs Iris</h3>
+                        <p class="text-gray-600 mb-4">Implémentation d'algorithmes de classification pour des données complexes avec machine learning.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Python</span>
+                            <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Scikit-learn</span>
+                            <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Pandas</span>
+                        </div>
+                        <button class="text-blue-600 font-medium hover:underline project-details" data-project="project3">Voir les détails</button>
+                    </div>
+                </div>
+                
+                <div class="project-card animated">
+                    <div class="bg-red-600 h-48 flex items-center justify-center">
+                        <i class="fas fa-eye text-white text-5xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Détection de Cancer du Sein</h3>
+                        <p class="text-gray-600 mb-4">Développement d'un modèle de détection de cancer du sein à travers des images en utilisant les CNN.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">Python</span>
+                            <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">TensorFlow</span>
+                            <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">Keras</span>
+                            <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">OpenCV</span>
+                        </div>
+                        <button class="text-blue-600 font-medium hover:underline project-details" data-project="project4">Voir les détails</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Modals -->
+    <div id="projectModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg w-full max-w-2xl max-h-90vh overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 id="modalTitle" class="text-2xl font-bold"></h3>
+                    <button class="text-gray-500 hover:text-gray-700 close-modal">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div id="modalContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold section-title animated">Contact</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="animated">
+                    <h3 class="text-xl font-semibold mb-6">Prenez contact</h3>
+                    <p class="mb-6">N'hésitez pas à me contacter pour discuter de projets potentiels, collaborations ou simplement pour échanger des idées.</p>
+                    
+                    <div class="space-y-4 contact-info">
+                        <div class="flex items-start">
+                            <i class="fas fa-envelope mt-1"></i>
+                            <div class="ml-4">
+                                <h4 class="font-medium">Email</h4>
+                                <p>fickou.daouda@ugb.edu.sn</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <i class="fas fa-phone mt-1"></i>
+                            <div class="ml-4">
+                                <h4 class="font-medium">Téléphone</h4>
+                                <p>+221-78-282-96-73</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1"></i>
+                            <div class="ml-4">
+                                <h4 class="font-medium">Adresse</h4>
+                                <p>Fass Mbao, Dakar, Sénégal</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h4 class="font-medium mb-4">Réseaux sociaux</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white hover:bg-blue-700 transition-colors">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white hover:bg-blue-700 transition-colors">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white hover:bg-blue-700 transition-colors">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="animated">
+                    <form class="bg-gray-50 p-8 rounded-lg">
+                        <div class="mb-6">
+                            <label for="name" class="block mb-2 font-medium">Nom</label>
+                            <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="email" class="block mb-2 font-medium">Email</label>
+                            <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="subject" class="block mb-2 font-medium">Sujet</label>
+                            <input type="text" id="subject" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="message" class="block mb-2 font-medium">Message</label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors">Envoyer le message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-8">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h2 class="text-2xl font-bold">Daouda Fickou</h2>
+                    <p class="text-blue-200">Développeur Full Stack</p>
+                </div>
+                
+                <div class="text-center md:text-right">
+                    <p>&copy; 2024 Daouda Fickou. Tous droits réservés.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Project Details Data
+        const projectsData = {
+            project1: {
+                title: "Plateforme de Gestion Scolaire",
+                content: `
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold mb-2">Description</h4>
+                        <p>Cette plateforme facilite la communication entre l'administration scolaire et les parents d'élèves. Elle permet la gestion des notes, des absences, des devoirs et des événements scolaires.</p>
+                    </div>
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold mb-2">Fonctionnalités principales</h4>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Tableau de bord personnalisé pour chaque utilisateur</li>
+                            <li>Gestion des notes et bulletins scolaires</li>
+                            <li>Suivi des absences et retards</li>
+                            <li>Messagerie interne sécurisée</li>
+                            <li>Calendrier des événements et devoirs</li>
+                            <li>Notifications en temps réel</li>
+                        </ul>
+                    </div>
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold mb-2">Technologies utilisées</h4>
+                        <p>Frontend: HTML5, CSS3, JavaScript, Bootstrap</p>
+                        <p>Backend: PHP, MySQL</p>
+                        <p>Outils: Git, Docker</p>
+                    </div>
+                `
+            },
+            project2: {
+                title: "Plateforme de Rendez-vous Médical",
+                content: `
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold mb-2">Description</h4>
+                        <p>Cette plateforme permet aux patients de prendre rendez-vous avec des médecins en ligne, facilitant ainsi la gestion des consultations médicales pour les établissements de santé.</p>
+                    </div>
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold mb-2">Fonctionnalités principales</h4>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Recherche de médecins par spécialité ou localisation</li>
+                            <li>Consultation des disponibilités en temps réel</li>
+                            <li>Prise de rendez-vous en ligne</li>
+                            <li>Rappels automatiques par email et SMS</li>
+                            <li>Historique des consultations</li>
+                            <li>Espace médecin pour la gestion de l'agenda</li>
+                        </ul>
+                    </div>
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold mb-2">Technologies utilisées</h4>
+                        <p>Frontend: Vue.js, Vuetify</p>
+                        <p>Backend: Laravel (PHP), MySQL</p>
+                        <p>API: RESTful API</p>
+                    </div>
+                `
+            },
+            project3: {
+                title: "Classification de Fleurs Iris",
+                content: `
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold mb-2">Description</h4>
+                        <p>Projet d'apprentissage automatique visant à classifier les différentes espèces de fleurs Iris en utilisant leurs caractéristiques morphologiques.</p>
+                    </div>
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold mb-2">Objectifs et méthodologie</h4>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Prétraitement et analyse exploratoire des données</li>
+                            <li>Implémentation de plusieurs algorithmes de classification (KNN, SVM, Random Forest)</li>
+                            <li>Évaluation et comparaison des performances des modèles</li>
+                            <li>Validation croisée et optimisation des hyperparamètres</li>
+                            <li>Visualisation des résultats et des frontières de décision</li>
+                        </ul>
+                    </div>
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold mb-2">Technologies utilisées</h4>
+                        <p>Langages: Python</p>
+                        <p>Bibliothèques: Scikit-learn, Pandas, NumPy, Matplotlib, Seaborn</p>
+                        <p>Environnement: Jupyter Notebook</p>
+                    </div>
+                `
+            },
+            project4: {
+                title: "Détection de Cancer du Sein",
+                content: `
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold mb-2">Description</h4>
+                        <p>Développement d'un modèle de deep learning pour la détection automatique du cancer du sein à partir d'images médicales, en utilisant la base de données BUSI.</p>
+                    </div>
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold mb-2">Méthodologie</h4>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Prétraitement des images (normalisation, redimensionnement, augmentation)</li>
+                            <li>Conception d'un réseau de neurones convolutifs (CNN) personnalisé</li>
+                            <li>Entraînement sur un jeu de données d'images médicales labellisées</li>
+                            <li>Évaluation du modèle (précision, rappel, F1-score, matrice de confusion)</li>
+                            <li>Optimisation du modèle pour améliorer les performances</li>
+                            <li>Développement d'une interface simple pour tester le modèle</li>
+                        </ul>
+                    </div>
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold mb-2">Technologies utilisées</h4>
+                        <p>Langages: Python</p>
+                        <p>Frameworks: TensorFlow, Keras</p>
+                        <p>Bibliothèques: OpenCV, NumPy, Matplotlib</p>
+                        <p>Matériel: GPU pour l'entraînement</p>
+                    </div>
+                `
+            }
+        };
+
+        // Function to check if element is in viewport
+        function isInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        // Function to animate elements when they come into view
+        function animateOnScroll() {
+            const animatedElements = document.querySelectorAll('.animated:not(.visible)');
+            
+            animatedElements.forEach(element => {
+                if (isInViewport(element)) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Initialize skill bars animation
+        function initSkillBars() {
+            const skillBars = document.querySelectorAll('.skill-progress');
+            
+            skillBars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 500);
+            });
+        }
+
+        // Mobile menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const closeMenu = document.querySelector('.close-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            
+            hamburger.addEventListener('click', function() {
+                mobileMenu.classList.add('active');
+            });
+            
+            closeMenu.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+            });
+            
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.remove('active');
+                });
+            });
+
+            // Project modal functionality
+            const projectDetails = document.querySelectorAll('.project-details');
+            const projectModal = document.getElementById('projectModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+            const closeModal = document.querySelector('.close-modal');
+            
+            projectDetails.forEach(button => {
+                button.addEventListener('click', function() {
+                    const projectId = this.getAttribute('data-project');
+                    const projectData = projectsData[projectId];
+                    
+                    modalTitle.textContent = projectData.title;
+                    modalContent.innerHTML = projectData.content;
+                    projectModal.classList.remove('hidden');
+                });
+            });
+            
+            closeModal.addEventListener('click', function() {
+                projectModal.classList.add('hidden');
+            });
+            
+            window.addEventListener('click', function(event) {
+                if (event.target === projectModal) {
+                    projectModal.classList.add('hidden');
+                }
+            });
+
+            // Initialize animations
+            animateOnScroll();
+            initSkillBars();
+            
+            // Run animation check on scroll
+            window.addEventListener('scroll', animateOnScroll);
+        });
+    </script>
+</body>
+</html>
